@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block content%}
+
+    <div class="container">
+        <div class="row">
+            <!-- Левая часть с изображением -->
+            <div class="col-md-4">
+                <img src="/media/{{ object.image_post }}" alt="Изображение товара" class="img-fluid">
+            </div>
+
+            <!-- Правая часть с информацией о товаре -->
+            <div class="col-md-8">
+                <h2>Название статьи: {{ object.title_post }} </h2>
+                <p>slug: {{ object.slug }}</p>
+                <p><b>Дата создания:</b> {{ object.data_post }} <b>Количество просмотров:</b> {{ object.views_count }}</p>
+                <p>Содержание статьи: {{ object.content_post }}</p>
+
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

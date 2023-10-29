@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% block content%}
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">Добавляем клиента</h1>
+            </div>
+        </div>
+    </div>
+{% if user.is_authenticated %}
+ <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">
+            {% if object %}
+                Изменить клиента
+            {% else %}
+                Создать клиента
+            {% endif %}
+
+        </button>
+    </form>
+</div>
+
+{% endif %}
+{% endblock %}

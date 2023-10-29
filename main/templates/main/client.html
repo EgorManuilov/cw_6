@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+    <div>
+        <div class="col-12 p-3 border bg-light">
+            <div class="card mb-4 box-shadow">
+                <div class="card">
+                    <div class="card-body">
+                        {% if user.is_authenticated %}
+                            <a href="/create_client" class="btn btn-primary col-12 row text-center">Добавить клиента для
+                                рассылки</a>
+
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+
+                            {% for object in object_list %}
+                                <div class="row align-item-start p-3 border bg-light"">
+                                <div class="col">
+                                    <div class="col-12 card-body">
+                                        <div class="card mb-4 box-shadow">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Клиент №{{ object.pk }}</h4>
+                                                    <div>Имя клиента {{ object.name_client }},
+                                                        Фамилия клиента- {{ object.first_name_client }},
+                                                        Отчество клиента - {{ object.last_name_client }}
+                                                        Почта клиента - {{ object.mail_client }}</div>
+
+                                                    <a href="{% url 'delete_client' object.pk %}"
+                                                       class="btn btn-danger">Удалить</a>
+                                                    <a href="{% url 'update_client' object.pk %}" class="btn btn-info">Изменить</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                            {% endfor %}
+
+                        {% else %}
+                            <h6>Зарегестрируйтесь или войдите, чтобы управлять клиентами для рассылки</h6>
+                        {% endif %}
+{% endblock %}

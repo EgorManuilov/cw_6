@@ -1,0 +1,114 @@
+{% extends 'main/base.html' %}
+{% block content%}
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Создание рассылки здесь</h1>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="col-12 p-3 border bg-light">
+        <div class="card mb-4 box-shadow">
+            <div class="card">
+                <div class="card-body" >
+    {% if user.is_authenticated %}
+        <a href="/create" class="btn btn-primary col-12 row text-center">Создать рассылку</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="col-12 p-3 border bg-light">
+        <div class="card mb-4 box-shadow">
+            <div class="card">
+                <div class="card-body" >
+   <div>
+    <div class="col-12 p-3 border bg-light">
+        <div class="card mb-4 box-shadow">
+            <div class="card">
+                <div class="card-body" >
+  <div>Рассылок {{ object.mailing_count }} :
+      Активные рассылки {{ object.active_mailings }} :
+        Клиентов для рассылок {{ object.unique_clients }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% for object in object_list %}
+<div class="row align-item-start p-3 border bg-light">
+    <div class="col">
+        <div class="col-12 card-body">
+            <div class="card mb-4 box-shadow">
+                <div class="card">
+                    <div class="card-body" >
+                        <h4 class="card-title">Рассылка №{{ object.pk }}</h4>
+                        <div>Время отправки {{ object.send_time }},
+                            Частота отправки - {{ object.frequency }}, статус рассылки - <b>{{ object.status }}</b></div>
+                        <a href="{% url 'delete' object.pk %}" class="btn btn-danger">Удалить</a>
+                        <a href="{% url 'update_mailing' object.pk %}" class="btn btn-info">Изменить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+    <div class="col-12">
+        <div class="card mb-4 box-shadow">
+            <div class="card">
+                <div class="card-body" >
+                    <h4 class="card-title">Что отправляем</h4>
+                    <div>Тема письма {{ object.theme_mess }}</div>
+                    <div>Текст письма - {{ object.body_mess }}</div>
+
+                    <a href="/client/" class="btn btn-primary">Посмотреть список клиентов</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% else %}
+        <h6>Зарегестрируйтесь или войдите, чтобы создать рассылку</h6>
+    {% endif %}
+<div><h3>Наш блог</h3></div>
+{% for blog in blog_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card">
+                    <div class="card-body" >
+                        <h3 class="card-title">{{ blog.title_post }}</h3>
+                        <img src="/media/{{ blog.image_post }}" alt="Card image" class="card-image">
+
+                    </div>
+                    <div class="card p-3">
+                        <a href="{% url 'blog:view' pk=blog.id %}" class="btn btn-primary">Читать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+            </div>
+    <div class="row text-center">
+        {% endif %}
+{% endfor %}
+</div>
+
+{% endblock %}
